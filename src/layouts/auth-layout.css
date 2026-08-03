@@ -1,0 +1,227 @@
+/* =====================================================================
+   Medical Pointing System — Authentication module layout
+   ---------------------------------------------------------------------
+   Shell shared by every auth page: a form column beside a brand panel.
+   Desktop-first (split screen); collapses to a single centred column on
+   narrow viewports. RTL by construction (logical properties). The form
+   column is the first grid track, so under dir=rtl it sits on the RIGHT.
+   ===================================================================== */
+
+.auth {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+@media (min-width: 64rem) {
+  .auth {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+/* --- Form column -------------------------------------------------------- */
+.auth__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--background);
+}
+
+@media (min-width: 48rem) {
+  .auth__main {
+    padding: var(--space-12) var(--space-10);
+  }
+}
+
+/* Constrained, vertically-hugging panel that holds a page's content. */
+.auth__panel {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.auth__topbar {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 64rem) {
+  .auth__topbar {
+    justify-content: flex-start;
+  }
+}
+
+.auth__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.auth__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.auth__subtitle {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  text-wrap: balance;
+}
+
+/* The email/identifier echoed back to the user (OTP screen). */
+.auth__subtitle strong {
+  color: var(--foreground);
+  font-weight: var(--weight-semibold);
+  unicode-bidi: plaintext;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.auth__footer {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+.auth__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.auth__back .icon {
+  width: 1rem;
+  height: 1rem;
+}
+/* The back-arrow points toward the reading start (right in RTL). */
+[dir="rtl"] .auth__back .icon {
+  transform: scaleX(-1);
+}
+
+.auth__legal {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+/* --- Brand panel (desktop only) ---------------------------------------- */
+.auth__aside {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-10);
+  padding: var(--space-12);
+  overflow: hidden;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  isolation: isolate;
+}
+
+@media (min-width: 64rem) {
+  .auth__aside {
+    display: flex;
+  }
+}
+
+/* Depth from the primitive brand steps — no invented colours. */
+.auth__aside::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 32rem at 120% -10%, var(--brand-500), transparent 60%),
+    radial-gradient(48rem 28rem at -10% 120%, var(--brand-950), transparent 55%);
+  opacity: 0.9;
+}
+
+.auth__aside-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.auth__aside-lead {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  line-height: 1.6;
+  text-wrap: balance;
+  max-width: 32ch;
+}
+
+.auth__features {
+  display: grid;
+  gap: var(--space-4);
+}
+.auth__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: rgb(250 250 250 / 0.85);
+}
+.auth__feature-icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background-color: rgb(255 255 255 / 0.1);
+  color: var(--primary-foreground);
+}
+.auth__feature-icon .icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.auth__feature-text strong {
+  display: block;
+  color: var(--primary-foreground);
+  font-weight: var(--weight-semibold);
+  margin-block-end: 0.125rem;
+}
+
+.auth__aside-legal {
+  font-size: var(--text-xs);
+  color: rgb(250 250 250 / 0.6);
+}
+
+/* Success state uses the shared .state-icon component (components.css);
+   the success page centres it with margin-inline:auto on the wrapper. */
+.auth__panel > .state-icon {
+  margin-inline: auto;
+}
+
+/* --- OTP helpers -------------------------------------------------------- */
+.auth__otp-resend {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+.auth__otp-resend button {
+  color: var(--primary);
+  font-weight: var(--weight-medium);
+}
+.auth__otp-resend button:hover {
+  text-decoration: underline;
+}
+.auth__otp-resend button:disabled {
+  color: var(--muted-foreground);
+  text-decoration: none;
+  cursor: default;
+}

@@ -1,0 +1,191 @@
+/* =====================================================================
+   Medical Pointing System — Design Token Layer
+   ---------------------------------------------------------------------
+   Plain-CSS projection of the INetworkME Design System (globals.css +
+   design-system.json). The source of truth is authored for Tailwind v4
+   (@import "tailwindcss" / @theme), which a no-build static site cannot
+   consume — so the SAME token values are exposed here as native CSS
+   custom properties. Values are 1:1 with globals.css; do not fork them.
+
+   Brand primary = #3D2267 (INetworkME purple). Arabic / RTL only.
+   ===================================================================== */
+
+:root {
+  /* --- Brand scale (primitive — reference via --primary, not directly) --- */
+  --brand-50: #f4f1fa;
+  --brand-100: #e8e1f4;
+  --brand-200: #d0c2e8;
+  --brand-300: #ac94d5;
+  --brand-400: #8360bc;
+  --brand-500: #5e3d9c;
+  --brand-600: #4c2f82;
+  --brand-700: #3d2267;
+  --brand-800: #311b53;
+  --brand-900: #251440;
+  --brand-950: #180c2b;
+
+  /* --- Semantic surfaces & text ---------------------------------------- */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+
+  /* --- Brand primary ---------------------------------------------------- */
+  --primary: #3d2267;
+  --primary-hover: #4c2f82;
+  --primary-foreground: #fafafa;
+
+  --secondary: #f5f5f5;
+  --secondary-hover: #e5e5e5;
+  --secondary-foreground: #171717;
+
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+
+  --accent: #f5f5f5;
+  --accent-pressed: #e5e5e5;
+  --accent-foreground: #171717;
+
+  /* --- Status: solid (badges / buttons) -------------------------------- */
+  --destructive: #ef4444;
+  --destructive-hover: #dc2626;
+  --destructive-foreground: #fafafa;
+  --success: #16a34a;
+  --success-foreground: #fafafa;
+  --warning: #f59e0b;
+  --warning-foreground: #0a0a0a;
+
+  /* --- Status: tinted containers (alerts / readable surfaces) ----------- */
+  --destructive-subtle: #fef2f2;
+  --destructive-border: #fecaca;
+  --destructive-accent: #dc2626;
+  --success-subtle: #f0fdf4;
+  --success-border: #bbf7d0;
+  --success-accent: #16a34a;
+  --warning-subtle: #fffbeb;
+  --warning-border: #fde68a;
+  --warning-accent: #d97706;
+  --info-subtle: #f4f1fa;
+  --info-border: #d0c2e8;
+  --info-accent: #4c2f82;
+
+  /* --- Lines & focus ---------------------------------------------------- */
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #0a0a0a;
+  --ring-subtle: #a3a3a3;      /* 3px OUTSIDE focus halo */
+  --destructive-ring: #fca5a5;
+
+  /* --- Sidebar surface (design-system "sidebar/*" tokens) --------------- */
+  --sidebar: #fafafa;
+  --sidebar-foreground: #0a0a0a;
+  --sidebar-primary: #3d2267;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #e5e5e5;
+  --sidebar-ring: #0a0a0a;
+
+  /* --- Radius (design-system.json → radius) ----------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 6px;   /* controls: button / input / otp slot */
+  --radius-lg: 8px;
+  --radius-xl: 12px;  /* cards */
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* --- Elevation -------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px 0 rgb(10 10 10 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(10 10 10 / 0.08), 0 1px 2px -1px rgb(10 10 10 / 0.08);
+  --shadow-md: 0 4px 6px -1px rgb(10 10 10 / 0.08), 0 2px 4px -2px rgb(10 10 10 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(10 10 10 / 0.10), 0 4px 6px -4px rgb(10 10 10 / 0.08);
+  --shadow-xl: 0 24px 48px -12px rgb(37 20 64 / 0.18);
+
+  /* --- Typography (Arabic face per design-system "6 · Script") ---------- */
+  --font-arabic: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font: var(--font-arabic);
+
+  --text-xs: 0.75rem;     /* 12 / 16 */
+  --text-sm: 0.875rem;    /* 14 / 20 */
+  --text-base: 1rem;      /* 16 / 24 */
+  --text-lg: 1.125rem;    /* 18 / 28 */
+  --text-xl: 1.25rem;     /* 20 / 28 */
+  --text-2xl: 1.5rem;     /* 24 / 32 */
+  --text-3xl: 1.875rem;   /* 30 / 36 */
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* --- Spacing steps used across the module ----------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* --- Control geometry (design-system: fixed heights) ------------------ */
+  --control-h: 2.5rem;    /* 40px — inputs & lg buttons on desktop */
+  --control-h-sm: 2.25rem;/* 36px */
+}
+
+/* Dark theme kept 1:1 with the design system for future parity. The Auth
+   module ships light; no toggle is in scope, but the tokens stay consistent. */
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: #0a0a0a;
+  --card-foreground: #fafafa;
+  --popover: #0a0a0a;
+  --popover-foreground: #fafafa;
+  --primary: #5e3d9c;
+  --primary-hover: #8360bc;
+  --primary-foreground: #fafafa;
+  --secondary: #262626;
+  --secondary-hover: #404040;
+  --secondary-foreground: #fafafa;
+  --muted: #262626;
+  --muted-foreground: #a3a3a3;
+  --accent: #262626;
+  --accent-pressed: #404040;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --destructive-hover: #991b1b;
+  --destructive-foreground: #fafafa;
+  --success: #22c55e;
+  --success-foreground: #0a0a0a;
+  --warning: #f59e0b;
+  --warning-foreground: #0a0a0a;
+  --destructive-subtle: #450a0a;
+  --destructive-border: #991b1b;
+  --destructive-accent: #f87171;
+  --success-subtle: #052e16;
+  --success-border: #15803d;
+  --success-accent: #22c55e;
+  --warning-subtle: #451a03;
+  --warning-border: #b45309;
+  --warning-accent: #f59e0b;
+  --info-subtle: #251440;
+  --info-border: #4c2f82;
+  --info-accent: #ac94d5;
+  --border: #262626;
+  --input: #262626;
+  --ring: #d4d4d4;
+  --ring-subtle: #525252;
+  --destructive-ring: #dc2626;
+  --sidebar: #171717;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #5e3d9c;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #262626;
+  --sidebar-ring: #d4d4d4;
+}

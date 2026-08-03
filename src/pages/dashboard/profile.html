@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="docTitle.profile">الملف الشخصي — بوابة الطاقم الطبي</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/base.css" />
+    <link rel="stylesheet" href="../../components/components.css" />
+    <link rel="stylesheet" href="../../layouts/dashboard-layout.css" />
+      <script src="../../scripts/i18n.js"></script>
+  </head>
+  <body data-layout="dashboard" data-nav="profile" data-title="الملف الشخصي" data-subtitle="بيانات حسابك في المجمع" data-title-key="pages.profile.title" data-subtitle-key="pages.profile.subtitle">
+    <div data-page>
+      <div class="page page--wide">
+        <section class="card" aria-label="الملف الشخصي" data-i18n-aria-label="pages.profile.title">
+          <div class="card__body">
+            <div class="patient-header">
+              <div class="patient-header__main">
+                <span class="avatar avatar--lg avatar--brand" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                </span>
+                <div class="patient-header__text">
+                  <span class="patient-header__name" data-i18n="user.name">د. سارة المنصور</span>
+                  <span class="patient-header__sub" data-i18n="profile.role">طبيبة باطنة</span>
+                </div>
+              </div>
+              <div class="patient-header__side">
+                <span class="badge badge--success" data-i18n="profile.active">حساب نشط</span>
+              </div>
+            </div>
+
+            <dl class="detail-list">
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="profile.email">البريد الإلكتروني المهني</dt>
+                <dd class="detail-list__value detail-list__value--code">sara.mansour@alshifa.com</dd>
+              </div>
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="profile.phone">رقم الجوال</dt>
+                <dd class="detail-list__value detail-list__value--code">+966 55 987 6543</dd>
+              </div>
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="profile.clinic">العيادة</dt>
+                <dd class="detail-list__value" data-i18n="clinic.internalMedicine">عيادة الباطنة — الدور الثاني</dd>
+              </div>
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="profile.license">رقم الترخيص المهني</dt>
+                <dd class="detail-list__value detail-list__value--code">SCFHS-4482913</dd>
+              </div>
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="profile.joined">تاريخ الانضمام</dt>
+                <dd class="detail-list__value" data-i18n="profile.joinedValue">١ مارس ٢٠٢٢</dd>
+              </div>
+            </dl>
+
+            <div class="page-actions">
+              <a class="btn btn--outline btn--lg" href="settings.html" data-i18n="profile.accountSettings">إعدادات الحساب</a>
+              <a class="btn btn--outline btn--lg" href="../auth/login.html" data-i18n="profile.logout">تسجيل الخروج</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../../layouts/layout.js"></script>
+  </body>
+</html>

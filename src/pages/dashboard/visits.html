@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="docTitle.visits">إدارة الزيارات — بوابة الطاقم الطبي</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/base.css" />
+    <link rel="stylesheet" href="../../components/components.css" />
+    <link rel="stylesheet" href="../../layouts/dashboard-layout.css" />
+      <script src="../../scripts/i18n.js"></script>
+  </head>
+  <body data-layout="dashboard" data-nav="visits" data-title="إدارة الزيارات" data-subtitle="زيارات اليوم · الخميس ٣٠ يوليو ٢٠٢٦" data-title-key="pages.visits.title" data-subtitle-key="pages.visits.subtitle">
+    <div data-page>
+      <div class="page page--wide">
+        <!-- Section 1 · Recently Arrived (waiting to be seen) -->
+        <section aria-label="المرضى الذين وصلوا حديثًا">
+          <div class="section-head">
+            <h2 data-i18n="visits.waitingSection">المرضى الذين وصلوا — بانتظار الكشف</h2>
+            <span class="badge badge--info"><span data-arrivals-count>٣</span> <span data-i18n="visits.waitingBadge">بانتظار الكشف</span></span>
+          </div>
+
+          <div class="arrivals-grid">
+            <article class="card arrival-card" data-visit-id="APT-20260730-0428">
+              <div class="card__body">
+                <div class="arrival-card__head">
+                  <span class="avatar" aria-hidden="true">أغ</span>
+                  <span class="arrival-card__id">
+                    <span class="arrival-card__name">أحمد عبدالله الغامدي</span>
+                    <span class="arrival-card__code">APT-20260730-0428</span>
+                  </span>
+                  <span class="badge badge--info" data-i18n="status.arrived">وصل</span>
+                </div>
+                <span class="badge badge--warning" data-waiting data-arrival-mins="8">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span data-waiting-text>بانتظار منذ ٨ دقائق</span>
+                </span>
+                <dl class="detail-list">
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.doctor">الطبيب</dt><dd class="detail-list__value">د. سارة المنصور</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.clinic">العيادة</dt><dd class="detail-list__value" data-i18n="clinic.internal">عيادة الباطنة</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.scheduled">الموعد المجدول</dt><dd class="detail-list__value">١٠:٣٠ صباحًا</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.arrivalTime">وقت الوصول</dt><dd class="detail-list__value">١٠:٣٢ صباحًا</dd></div>
+                </dl>
+                <a class="btn btn--primary btn--block" href="patient-details.html" data-start-visit="APT-20260730-0428" data-i18n="visits.startConsultation">بدء الكشف</a>
+              </div>
+            </article>
+
+            <article class="card arrival-card" data-visit-id="APT-20260730-0433">
+              <div class="card__body">
+                <div class="arrival-card__head">
+                  <span class="avatar" aria-hidden="true">سز</span>
+                  <span class="arrival-card__id">
+                    <span class="arrival-card__name">سارة علي الزهراني</span>
+                    <span class="arrival-card__code">APT-20260730-0433</span>
+                  </span>
+                  <span class="badge badge--info" data-i18n="status.arrived">وصل</span>
+                </div>
+                <span class="badge badge--warning" data-waiting data-arrival-mins="5">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span data-waiting-text>بانتظار منذ ٥ دقائق</span>
+                </span>
+                <dl class="detail-list">
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.doctor">الطبيب</dt><dd class="detail-list__value">د. خالد الفوزان</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.clinic">العيادة</dt><dd class="detail-list__value" data-i18n="clinic.cardiology">عيادة القلب</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.scheduled">الموعد المجدول</dt><dd class="detail-list__value">١٠:٤٥ صباحًا</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.arrivalTime">وقت الوصول</dt><dd class="detail-list__value">١٠:٣٥ صباحًا</dd></div>
+                </dl>
+                <a class="btn btn--primary btn--block" href="patient-details.html" data-start-visit="APT-20260730-0433" data-i18n="visits.startConsultation">بدء الكشف</a>
+              </div>
+            </article>
+
+            <article class="card arrival-card" data-visit-id="APT-20260730-0447">
+              <div class="card__body">
+                <div class="arrival-card__head">
+                  <span class="avatar" aria-hidden="true">فد</span>
+                  <span class="arrival-card__id">
+                    <span class="arrival-card__name">فهد ناصر الدوسري</span>
+                    <span class="arrival-card__code">APT-20260730-0447</span>
+                  </span>
+                  <span class="badge badge--info" data-i18n="status.arrived">وصل</span>
+                </div>
+                <span class="badge badge--warning" data-waiting data-arrival-mins="2">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span data-waiting-text>بانتظار منذ دقيقتين</span>
+                </span>
+                <dl class="detail-list">
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.doctor">الطبيب</dt><dd class="detail-list__value">د. خالد الفوزان</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.clinic">العيادة</dt><dd class="detail-list__value" data-i18n="clinic.cardiology">عيادة القلب</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.scheduled">الموعد المجدول</dt><dd class="detail-list__value">١١:٠٠ صباحًا</dd></div>
+                  <div class="detail-list__row"><dt class="detail-list__label" data-i18n="field.arrivalTime">وقت الوصول</dt><dd class="detail-list__value">١٠:٣٨ صباحًا</dd></div>
+                </dl>
+                <a class="btn btn--primary btn--block" href="patient-details.html" data-start-visit="APT-20260730-0447" data-i18n="visits.startConsultation">بدء الكشف</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Empty state (all waiting patients have been picked up) -->
+          <div class="card" data-arrivals-empty hidden>
+            <div class="card__body">
+              <div class="result">
+                <div class="state-icon state-icon--info" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <header class="page__header">
+                  <h3 class="page__title" data-i18n="visits.emptyTitle">لا يوجد مرضى بانتظار الكشف</h3>
+                  <p class="page__subtitle" data-i18n="visits.emptyDesc">تم استقبال جميع المرضى الذين وصلوا. سيظهر المرضى هنا فور تسجيل وصولهم عبر التطبيق.</p>
+                </header>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2 · Today's visits table -->
+        <section class="card" aria-label="زيارات اليوم">
+          <div class="card__body">
+            <h2 class="card__heading">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+              <span data-i18n="visits.today">زيارات اليوم</span>
+            </h2>
+
+            <div class="filters">
+              <div class="field">
+                <label class="label" for="search" data-i18n="filter.search">بحث</label>
+                <div class="search-field">
+                  <span class="search-field__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+                  <input class="input" id="search" type="search" placeholder="اسم المريض أو رقم الموعد..." data-i18n-placeholder="dashboard.searchPlaceholder" data-search autocomplete="off" />
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="f-status" data-i18n="filter.status">الحالة</label>
+                <select class="select" id="f-status" data-filter-status>
+                  <option value="" data-i18n="filter.allStatuses">كل الحالات</option>
+                  <option value="waiting" data-i18n="status.waiting">بانتظار</option>
+                  <option value="arrived" data-i18n="status.arrived">وصل</option>
+                  <option value="in-progress" data-i18n="status.inProgress">قيد الكشف</option>
+                  <option value="completed" data-i18n="status.completed">مكتمل</option>
+                  <option value="cancelled" data-i18n="status.cancelled">ملغى</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="label" for="f-doctor" data-i18n="filter.doctor">الطبيب</label>
+                <select class="select" id="f-doctor" data-filter-doctor>
+                  <option value="" data-i18n="filter.allDoctors">كل الأطباء</option>
+                  <option value="sara">د. سارة المنصور</option>
+                  <option value="khaled">د. خالد الفوزان</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="label" for="f-clinic" data-i18n="filter.clinic">العيادة</label>
+                <select class="select" id="f-clinic" data-filter-clinic>
+                  <option value="" data-i18n="filter.allClinics">كل العيادات</option>
+                  <option value="batinah" data-i18n="clinic.internal">عيادة الباطنة</option>
+                  <option value="cardiology" data-i18n="clinic.cardiology">عيادة القلب</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="label" for="f-date" data-i18n="filter.date">التاريخ</label>
+                <input class="input" id="f-date" type="date" value="2026-07-30" data-filter-date />
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="table.apptNo">رقم الموعد</th>
+                    <th scope="col" data-i18n="table.patient">المريض</th>
+                    <th scope="col" data-i18n="table.doctor">الطبيب</th>
+                    <th scope="col" data-i18n="table.clinic">العيادة</th>
+                    <th scope="col" data-i18n="table.apptTime">وقت الموعد</th>
+                    <th scope="col" data-i18n="table.visitStatus">حالة الزيارة</th>
+                    <th scope="col" class="table__action" data-i18n="table.action">الإجراء</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-visit-row data-visit-id="APT-20260730-0402" data-status="completed" data-doctor="sara" data-clinic="batinah" data-date="2026-07-30" data-search-text="نورة القحطاني 0402 سارة المنصور الباطنة">
+                    <td class="table__code">APT-20260730-0402</td>
+                    <td>نورة سعد القحطاني</td>
+                    <td>د. سارة المنصور</td>
+                    <td data-i18n="clinic.internal">عيادة الباطنة</td>
+                    <td class="table__num">٠٩:٠٠ ص</td>
+                    <td><span class="badge badge--success" data-status-badge data-i18n="status.completed">مكتمل</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0415" data-status="in-progress" data-doctor="sara" data-clinic="batinah" data-date="2026-07-30" data-search-text="خالد العتيبي 0415 سارة المنصور الباطنة">
+                    <td class="table__code">APT-20260730-0415</td>
+                    <td>خالد محمد العتيبي</td>
+                    <td>د. سارة المنصور</td>
+                    <td data-i18n="clinic.internal">عيادة الباطنة</td>
+                    <td class="table__num">٠٩:٣٠ ص</td>
+                    <td><span class="badge badge--warning" data-status-badge data-i18n="status.inProgress">قيد الكشف</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0428" data-status="arrived" data-doctor="sara" data-clinic="batinah" data-date="2026-07-30" data-search-text="أحمد الغامدي 0428 سارة المنصور الباطنة">
+                    <td class="table__code">APT-20260730-0428</td>
+                    <td>أحمد عبدالله الغامدي</td>
+                    <td>د. سارة المنصور</td>
+                    <td data-i18n="clinic.internal">عيادة الباطنة</td>
+                    <td class="table__num">١٠:٣٠ ص</td>
+                    <td><span class="badge badge--info" data-status-badge data-i18n="status.arrived">وصل</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0433" data-status="arrived" data-doctor="khaled" data-clinic="cardiology" data-date="2026-07-30" data-search-text="سارة الزهراني 0433 خالد الفوزان القلب">
+                    <td class="table__code">APT-20260730-0433</td>
+                    <td>سارة علي الزهراني</td>
+                    <td>د. خالد الفوزان</td>
+                    <td data-i18n="clinic.cardiology">عيادة القلب</td>
+                    <td class="table__num">١٠:٤٥ ص</td>
+                    <td><span class="badge badge--info" data-status-badge data-i18n="status.arrived">وصل</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0447" data-status="arrived" data-doctor="khaled" data-clinic="cardiology" data-date="2026-07-30" data-search-text="فهد الدوسري 0447 خالد الفوزان القلب">
+                    <td class="table__code">APT-20260730-0447</td>
+                    <td>فهد ناصر الدوسري</td>
+                    <td>د. خالد الفوزان</td>
+                    <td data-i18n="clinic.cardiology">عيادة القلب</td>
+                    <td class="table__num">١١:٠٠ ص</td>
+                    <td><span class="badge badge--info" data-status-badge data-i18n="status.arrived">وصل</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0455" data-status="waiting" data-doctor="khaled" data-clinic="cardiology" data-date="2026-07-30" data-search-text="عبدالله السبيعي 0455 خالد الفوزان القلب">
+                    <td class="table__code">APT-20260730-0455</td>
+                    <td>عبدالله محمد السبيعي</td>
+                    <td>د. خالد الفوزان</td>
+                    <td data-i18n="clinic.cardiology">عيادة القلب</td>
+                    <td class="table__num">١١:١٥ ص</td>
+                    <td><span class="badge badge--muted" data-status-badge data-i18n="status.waiting">بانتظار</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0460" data-status="waiting" data-doctor="sara" data-clinic="batinah" data-date="2026-07-30" data-search-text="ريم العنزي 0460 سارة المنصور الباطنة">
+                    <td class="table__code">APT-20260730-0460</td>
+                    <td>ريم فهد العنزي</td>
+                    <td>د. سارة المنصور</td>
+                    <td data-i18n="clinic.internal">عيادة الباطنة</td>
+                    <td class="table__num">١١:٣٠ ص</td>
+                    <td><span class="badge badge--muted" data-status-badge data-i18n="status.waiting">بانتظار</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                  <tr data-visit-row data-visit-id="APT-20260730-0390" data-status="cancelled" data-doctor="sara" data-clinic="batinah" data-date="2026-07-30" data-search-text="منى الحربي 0390 سارة المنصور الباطنة">
+                    <td class="table__code">APT-20260730-0390</td>
+                    <td>منى عبدالرحمن الحربي</td>
+                    <td>د. سارة المنصور</td>
+                    <td data-i18n="clinic.internal">عيادة الباطنة</td>
+                    <td class="table__num">٠٨:٤٥ ص</td>
+                    <td><span class="badge badge--destructive" data-status-badge data-i18n="status.cancelled">ملغى</span></td>
+                    <td class="table__action"><a class="btn btn--outline" href="patient-details.html" data-i18n="table.openFile">فتح الملف</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="queue-empty" data-visits-empty hidden data-i18n="visits.searchEmpty">لا توجد زيارات مطابقة للبحث أو التصفية.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../../layouts/layout.js"></script>
+    <script src="../../scripts/visits.js"></script>
+  </body>
+</html>

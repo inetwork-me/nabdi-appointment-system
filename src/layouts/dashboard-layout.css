@@ -1,0 +1,1180 @@
+/* =====================================================================
+   Medical Pointing System — Dashboard app shell + QR Check-in module
+   ---------------------------------------------------------------------
+   The signed-in dashboard chrome shared by every internal module
+   (sidebar + topbar + content), plus the QR Check-in specific pieces
+   (scanner surface, result screen, page scaffolding). Consumes tokens.css
+   and the shared component library; introduces no new colours.
+   RTL by construction — sidebar sits on the right, dividers use logical
+   properties.
+   ===================================================================== */
+
+/* --------------------------------------------------------------------- *
+ * App shell
+ * --------------------------------------------------------------------- */
+.app {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--background);
+  transition: grid-template-columns 0.2s ease;
+}
+
+@media (min-width: 64rem) {
+  .app {
+    grid-template-columns: 17rem 1fr;
+  }
+}
+
+/* --- Sidebar --------------------------------------------------------- *
+ * Mobile/tablet: off-canvas drawer sliding from the inline-start (right
+ * under RTL), toggled by the topbar menu button. Desktop (>=64rem): a
+ * static sticky column in the app grid.                                 */
+.app__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-4);
+  background-color: var(--sidebar);
+  color: var(--sidebar-foreground);
+  border-inline-end: 1px solid var(--sidebar-border);
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 50;
+  width: 17rem;
+  max-width: 85vw;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  box-shadow: var(--shadow-xl);
+}
+.app.is-nav-open .app__sidebar {
+  transform: translateX(0);
+}
+/* LTR: the drawer lives on the left, so it hides off the left edge. */
+@media (max-width: 63.99rem) {
+  [dir="ltr"] .app__sidebar {
+    transform: translateX(-100%);
+  }
+  [dir="ltr"] .app.is-nav-open .app__sidebar {
+    transform: translateX(0);
+  }
+}
+@media (min-width: 64rem) {
+  .app__sidebar {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    width: auto;
+    max-width: none;
+    transform: none;
+    box-shadow: none;
+    z-index: auto;
+  }
+}
+
+/* Backdrop behind the open mobile drawer */
+.app__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background-color: rgb(10 10 10 / 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.app.is-nav-open .app__backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+@media (min-width: 64rem) {
+  .app__backdrop {
+    display: none;
+  }
+}
+
+.side-brand {
+  padding-inline: var(--space-2);
+  min-width: 0;
+}
+
+/* Floating collapse/expand toggle pinned to the sidebar's inner edge (the
+   boundary with the content). It straddles the edge and slides inward when
+   the sidebar collapses. Desktop only — mobile uses the drawer hamburger. */
+.side-collapse {
+  display: none;
+}
+@media (min-width: 64rem) {
+  .side-collapse {
+    display: inline-grid;
+    place-items: center;
+    position: fixed;
+    top: 4.75rem;
+    inset-inline-start: 17rem;
+    margin-inline-start: -0.9375rem;
+    z-index: 20;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: var(--radius-full);
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    color: var(--muted-foreground);
+    transition: inset-inline-start 0.2s ease, background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .side-collapse:hover {
+    color: var(--foreground);
+    background-color: var(--accent);
+  }
+  .side-collapse:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--ring-subtle);
+  }
+  .side-collapse .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* --- Collapsed (icons-only) sidebar — desktop only ------------------- */
+@media (min-width: 64rem) {
+  .app.is-nav-collapsed {
+    grid-template-columns: 4.5rem 1fr;
+  }
+  .app.is-nav-collapsed .app__sidebar {
+    padding-inline: var(--space-2);
+  }
+  /* The edge toggle follows the narrower sidebar */
+  .app.is-nav-collapsed .side-collapse {
+    inset-inline-start: 4.5rem;
+  }
+  .app.is-nav-collapsed .side-brand {
+    padding-inline: 0;
+  }
+  .app.is-nav-collapsed .brand {
+    justify-content: center;
+  }
+  /* Hide labels, section headers, counts and the user text */
+  .app.is-nav-collapsed .brand__text,
+  .app.is-nav-collapsed .side-nav__label,
+  .app.is-nav-collapsed .side-nav__item > span,
+  .app.is-nav-collapsed .side-user__text {
+    display: none;
+  }
+  /* Centre the remaining icons */
+  .app.is-nav-collapsed .side-nav__item {
+    justify-content: center;
+    padding-inline: 0;
+    gap: 0;
+  }
+  .app.is-nav-collapsed .side-user {
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-inline: 0;
+  }
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+.side-nav__label {
+  padding: var(--space-2) var(--space-2) var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--muted-foreground);
+}
+.side-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 2.5rem;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--sidebar-foreground);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.side-nav__item:hover {
+  background-color: var(--sidebar-accent);
+  color: var(--sidebar-accent-foreground);
+  text-decoration: none;
+}
+.side-nav__item .icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+.side-nav__item.is-active {
+  background-color: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+}
+.side-nav__item.is-active:hover {
+  background-color: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+}
+.side-nav__count {
+  margin-inline-start: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* User chip pinned to the sidebar foot */
+.side-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  border-top: 1px solid var(--sidebar-border);
+}
+.side-user__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+.side-user__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--sidebar-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.side-user__role {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+
+/* --- Main column ------------------------------------------------------- */
+.app__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app__topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 4rem;
+  padding: var(--space-3) var(--space-6);
+  background-color: color-mix(in oklab, var(--background) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.app__topbar-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.app__topbar-title h1 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.app__topbar-title p {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+.app__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Hamburger menu button — opens the drawer on mobile, hidden on desktop */
+@media (min-width: 64rem) {
+  .app__menu {
+    display: none;
+  }
+}
+
+.app__content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-8) var(--space-6);
+}
+@media (min-width: 48rem) {
+  .app__content {
+    padding: var(--space-12) var(--space-8);
+  }
+}
+
+/* Content measure — check-in screens are single-column and centred. */
+.page {
+  width: 100%;
+  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: center;
+}
+.page__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.page__subtitle {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------------- *
+ * Manual code entry row (label + input + button)
+ * Shared by the appointment-queue "manual appointment code" entry point.
+ * --------------------------------------------------------------------- */
+.scan-manual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.scan-manual__row {
+  display: flex;
+  gap: var(--space-2);
+}
+.scan-manual__row .input {
+  flex: 1;
+  unicode-bidi: plaintext;
+}
+
+/* --------------------------------------------------------------------- *
+ * Result screen (success / invalid / expired / already checked-in)
+ * --------------------------------------------------------------------- */
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+.result .state-icon {
+  margin-block-end: var(--space-1);
+}
+.result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+.result__actions .btn {
+  flex: 1;
+  min-width: 12rem;
+}
+
+/* Patient identity chip reused on result screens */
+.patient-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background-color: var(--muted);
+  width: 100%;
+  text-align: start;
+}
+.patient-chip__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+  flex: 1;
+  min-width: 0;
+}
+.patient-chip__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.patient-chip__meta {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  unicode-bidi: plaintext;
+}
+
+/* --------------------------------------------------------------------- *
+ * Wide content variant (Dashboard Home and future list/detail modules)
+ * --------------------------------------------------------------------- */
+.page--wide {
+  max-width: none;
+}
+.app__content:has(.page--wide) {
+  justify-content: stretch;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-block-end: var(--space-3);
+}
+.section-head h2 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+
+/* Greeting banner */
+.dash-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.dash-hero__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.dash-hero__meta {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+/* Stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+@media (min-width: 48rem) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+.stat__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.stat__label {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+.stat__icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--info-subtle);
+  color: var(--info-accent);
+}
+.stat__icon .icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.stat__value {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--foreground);
+  line-height: 1;
+}
+
+/* Quick actions */
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: 40rem) {
+  .quick-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.quick {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  text-align: start;
+  color: var(--foreground);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+a.quick:hover {
+  text-decoration: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+.quick__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+.quick__title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+}
+.quick__desc {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+/* Simple data table (requests, lists) */
+.table-wrap {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: start;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.table th {
+  font-weight: var(--weight-medium);
+  color: var(--muted-foreground);
+  background-color: var(--muted);
+}
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.table__code {
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+/* The code reads left-to-right; in LTR that already sits at the start edge,
+   but in RTL plaintext makes text-align:start resolve left, so pin it right. */
+[dir="rtl"] .table__code {
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------- *
+ * Patient Details — header + section grid
+ * --------------------------------------------------------------------- */
+.patient-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+.patient-header__main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.patient-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+.patient-header__name {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.patient-header__sub {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+  unicode-bidi: plaintext;
+}
+.patient-header__side {
+  margin-inline-start: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  text-align: end;
+}
+.patient-header__checkin {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+.patient-header__checkin .icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Two-column card grid for the detail sections */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 48rem) {
+  .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.detail-grid__full {
+  grid-column: 1 / -1;
+}
+
+/* Medical summary — stacked label + content (badges or text) */
+.med-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.med-item:first-child {
+  padding-block-start: 0;
+}
+.med-item:last-child {
+  padding-block-end: 0;
+  border-bottom: 0;
+}
+.med-item__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+.med-item__label .icon {
+  width: 1rem;
+  height: 1rem;
+}
+.med-item__value {
+  font-size: var(--text-sm);
+  color: var(--foreground);
+}
+
+/* Page footer actions (detail pages) */
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.page-actions .btn {
+  min-width: 12rem;
+}
+@media (max-width: 32rem) {
+  .page-actions .btn {
+    flex: 1;
+  }
+}
+
+/* --------------------------------------------------------------------- *
+ * Review Selected Services
+ * --------------------------------------------------------------------- */
+/* Separate the identity header from the summary detail list */
+.patient-header + .detail-list {
+  margin-block-start: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* Table remove-action column hugs its content */
+.table__action {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+.table__num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cost summary */
+.cost-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.cost-summary__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.cost-summary__label {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+.cost-summary__value {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.cost-summary__item--total {
+  align-items: flex-end;
+  text-align: end;
+}
+.cost-summary__item--total .cost-summary__value {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--primary);
+}
+
+/* --------------------------------------------------------------------- *
+ * Appointment Queue — toolbar (search + manual code)
+ * --------------------------------------------------------------------- */
+.queue-toolbar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 48rem) {
+  .queue-toolbar {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Search input with a leading icon (icon sits at the inline-start) */
+.search-field {
+  position: relative;
+}
+.search-field .input {
+  padding-inline-start: 2.5rem;
+}
+.search-field__icon {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+.search-field__icon .icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Empty state row when a search returns nothing */
+.queue-empty {
+  padding: var(--space-6);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+/* --------------------------------------------------------------------- *
+ * Recently Arrived Patients (dashboard priority section)
+ * Highlighted via a brand accent edge; otherwise a standard card.
+ * --------------------------------------------------------------------- */
+.arrivals-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: 48rem) {
+  .arrivals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 72rem) {
+  .arrivals-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.arrival-card {
+  border-inline-start: 3px solid var(--primary);
+}
+.arrival-card .card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.arrival-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.arrival-card__id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.arrival-card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.arrival-card__code {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  unicode-bidi: plaintext;
+}
+
+/* --------------------------------------------------------------------- *
+ * Filters row (Visit Management table) — search + status/doctor/clinic/date
+ * --------------------------------------------------------------------- */
+.filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+@media (min-width: 40rem) {
+  .filters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 64rem) {
+  .filters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 80rem) {
+  .filters {
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    align-items: end;
+  }
+}
+
+/* ===================================================================== *
+ * Consultation workspace (Additional Medical Services)
+ * Sticky consultation header + three-column layout (categories /
+ * services / treatment plan). Desktop-first; stacks on narrow screens.
+ * ===================================================================== */
+
+/* --- Persistent consultation header --------------------------------- */
+.consult-header {
+  position: sticky;
+  top: 4rem;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+.consult-header__patient {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.consult-header__id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.consult-header__name {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.consult-header__sub {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  unicode-bidi: plaintext;
+}
+.consult-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+.consult-header__meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+}
+.consult-header__meta dt {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+.consult-header__meta dd {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+}
+.consult-header__status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  margin-inline-start: auto;
+  text-align: end;
+}
+.consult-header__time {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+
+/* --- Three-column layout -------------------------------------------- */
+.consult-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 64rem) {
+  .consult-layout {
+    grid-template-columns: 14rem minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+}
+
+/* --- LEFT · Medical categories -------------------------------------- */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+@media (min-width: 64rem) {
+  .consult-layout .category-list {
+    position: sticky;
+    top: 8.5rem;
+  }
+}
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+  text-align: start;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.category-item:hover {
+  background-color: var(--accent);
+}
+.category-item.is-active {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* --- CENTER · Service cards ----------------------------------------- */
+.consult-services {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.service-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.services-empty {
+  padding: var(--space-6);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+
+/* --- RIGHT · Treatment plan (sticky) -------------------------------- */
+@media (min-width: 64rem) {
+  .consult-plan {
+    position: sticky;
+    top: 8.5rem;
+  }
+}
+.treatment-plan .card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.treatment-plan__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.treatment-plan__head .card__heading {
+  margin-block-end: 0;
+}
+.treatment-plan__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.treatment-plan__empty {
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+.treatment-plan__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block-start: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+.treatment-plan__total-label {
+  font-size: var(--text-sm);
+  color: var(--muted-foreground);
+}
+.treatment-plan__total-value {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Plan line item */
+.plan-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+}
+.plan-item__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.plan-item__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+}
+.plan-item__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.plan-item__subtotal {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Full-width content variant (consultation workspace) */
+.page--full {
+  max-width: none;
+}
+.app__content:has(.page--full) {
+  justify-content: stretch;
+}
+
+/* --------------------------------------------------------------------- *
+ * Medical Services Catalog (standalone browse page)
+ * Two columns: categories + search/table. Patient-agnostic.
+ * --------------------------------------------------------------------- */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 64rem) {
+  .catalog-layout {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    align-items: start;
+  }
+  .catalog-layout .category-list {
+    position: sticky;
+    top: 5rem;
+  }
+}
+.catalog-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* --------------------------------------------------------------------- *
+ * Responsive: category filters become a horizontal scroller on mobile
+ * (consultation workspace + catalog), instead of a tall stacked list.
+ * --------------------------------------------------------------------- */
+@media (max-width: 63.99rem) {
+  .category-list {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: var(--space-2);
+    padding-block-end: var(--space-1);
+  }
+  .category-item {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* --------------------------------------------------------------------- *
+ * Language switcher (topbar) — compact native <select> with a globe icon.
+ * Bidirectional: the caret sits at the inline-end in both RTL and LTR.
+ * --------------------------------------------------------------------- */
+.lang-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.lang-switch__icon {
+  position: absolute;
+  inset-inline-start: var(--space-2);
+  display: grid;
+  place-items: center;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+.lang-switch__icon .icon {
+  width: 1rem;
+  height: 1rem;
+}
+.lang-switch__select {
+  height: 2rem;
+  padding-inline: 1.75rem var(--space-6);
+  border: 1px solid var(--input);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  color: var(--foreground);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23737373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-2) center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+[dir="rtl"] .lang-switch__select {
+  background-position: left var(--space-2) center;
+}
+.lang-switch__select:focus-visible {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px var(--ring-subtle);
+}

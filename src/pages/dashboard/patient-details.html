@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="docTitle.patient">تفاصيل المريض — بوابة الطاقم الطبي</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/base.css" />
+    <link rel="stylesheet" href="../../components/components.css" />
+    <link rel="stylesheet" href="../../layouts/dashboard-layout.css" />
+      <script src="../../scripts/i18n.js"></script>
+  </head>
+  <body data-layout="dashboard" data-nav="visits" data-title="تفاصيل المريض" data-subtitle="مراجعة الموعد قبل بدء الاستشارة" data-title-key="pages.patient.title" data-subtitle-key="pages.patient.subtitle">
+    <div data-page>
+      <div class="page page--wide">
+        <!-- Identity header + appointment summary -->
+        <section class="card" aria-label="ملخّص المريض">
+          <div class="card__body">
+            <div class="patient-header">
+              <div class="patient-header__main">
+                <span class="avatar avatar--lg" aria-hidden="true">أغ</span>
+                <div class="patient-header__text">
+                  <span class="patient-header__name">أحمد عبدالله الغامدي</span>
+                  <span class="patient-header__sub">رقم الملف الطبي: MRN-88214 · موعد رقم APT-20260730-0428</span>
+                </div>
+              </div>
+              <div class="patient-header__side">
+                <span class="badge badge--success">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span data-i18n="status.checkedIn">تم تسجيل الوصول</span>
+                </span>
+                <span class="patient-header__checkin">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  تسجيل الوصول: ١٠:٣٢ صباحًا
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="detail-grid">
+          <!-- 1 · Patient Information -->
+          <section class="card">
+            <div class="card__body">
+              <h2 class="card__heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span data-i18n="patient.section.info">معلومات المريض</span>
+              </h2>
+              <dl class="detail-list">
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.fullName">الاسم الكامل</dt>
+                  <dd class="detail-list__value">أحمد عبدالله الغامدي</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.age">العمر</dt>
+                  <dd class="detail-list__value">٤٧ سنة</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.gender">الجنس</dt>
+                  <dd class="detail-list__value" data-i18n="patient.value.gender.male">ذكر</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.phone">رقم الجوال</dt>
+                  <dd class="detail-list__value detail-list__value--code">+966 55 123 4567</dd>
+                </div>
+              </dl>
+            </div>
+          </section>
+
+          <!-- 2 · Appointment Information -->
+          <section class="card">
+            <div class="card__body">
+              <h2 class="card__heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                <span data-i18n="patient.section.appt">معلومات الموعد</span>
+              </h2>
+              <dl class="detail-list">
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.apptType">نوع الموعد</dt>
+                  <dd class="detail-list__value" data-i18n="patient.apptType.value">كشف واستشارة</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.clinic">العيادة</dt>
+                  <dd class="detail-list__value" data-i18n="patient.value.clinic">عيادة الباطنة — الدور الثاني</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.doctor">الطبيب</dt>
+                  <dd class="detail-list__value">د. سارة المنصور</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.scheduledTime">الوقت المجدول</dt>
+                  <dd class="detail-list__value">١٠:٣٠ صباحًا · الخميس ٣٠ يوليو ٢٠٢٦</dd>
+                </div>
+                <div class="detail-list__row">
+                  <dt class="detail-list__label" data-i18n="field.currentStatus">الحالة الحالية</dt>
+                  <dd class="detail-list__value"><span class="badge badge--success" data-i18n="status.checkedIn">تم تسجيل الوصول</span></dd>
+                </div>
+              </dl>
+            </div>
+          </section>
+
+          <!-- 3 · Medical Summary (lightweight) -->
+          <section class="card detail-grid__full">
+            <div class="card__body">
+              <h2 class="card__heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.49 4.04 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
+                <span data-i18n="patient.section.medical">الملخّص الطبي</span>
+              </h2>
+              <div>
+                <div class="med-item">
+                  <span class="med-item__label">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    <span data-i18n="patient.allergies">الحساسية</span>
+                  </span>
+                  <div class="tag-group">
+                    <span class="badge badge--destructive" data-i18n="patient.value.allergyPenicillin">البنسلين</span>
+                    <span class="badge badge--destructive" data-i18n="patient.value.allergyNuts">المكسرات</span>
+                  </div>
+                </div>
+
+                <div class="med-item">
+                  <span class="med-item__label">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    <span data-i18n="patient.chronic">الأمراض المزمنة</span>
+                  </span>
+                  <div class="tag-group">
+                    <span class="badge badge--warning" data-i18n="patient.value.chronicDiabetes">السكري (النوع الثاني)</span>
+                    <span class="badge badge--warning" data-i18n="patient.value.chronicHypertension">ارتفاع ضغط الدم</span>
+                  </div>
+                </div>
+
+                <div class="med-item">
+                  <span class="med-item__label">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-7.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>
+                    <span data-i18n="patient.previousVisits">الزيارات السابقة</span>
+                  </span>
+                  <span class="med-item__value" data-i18n="patient.value.previousVisits">٨ زيارات · آخرها بتاريخ ١٢ مايو ٢٠٢٦ (متابعة سكري)</span>
+                </div>
+
+                <div class="med-item">
+                  <span class="med-item__label">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                    <span data-i18n="patient.notes">ملاحظات</span>
+                  </span>
+                  <span class="med-item__value" data-i18n="patient.value.notes">يتابع مع عيادة الغدد الصماء. يُفضّل التواصل باللغة العربية.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Actions -->
+        <div class="page-actions">
+          <a class="btn btn--primary btn--lg" href="treatment-plan.html" data-i18n="patient.startConsultation">بدء الاستشارة</a>
+          <a class="btn btn--outline btn--lg" href="visits.html" data-i18n="patient.backToVisits">العودة إلى إدارة الزيارات</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../layouts/layout.js"></script>
+  </body>
+</html>

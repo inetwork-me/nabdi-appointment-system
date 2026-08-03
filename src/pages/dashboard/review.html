@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="docTitle.review">مراجعة خطة العلاج — بوابة الطاقم الطبي</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/base.css" />
+    <link rel="stylesheet" href="../../components/components.css" />
+    <link rel="stylesheet" href="../../layouts/dashboard-layout.css" />
+      <script src="../../scripts/i18n.js"></script>
+  </head>
+  <body data-layout="dashboard" data-nav="visits" data-title="مراجعة خطة العلاج" data-subtitle="راجع الخدمات قبل حفظها وإرسالها" data-title-key="pages.review.title" data-subtitle-key="pages.review.subtitle">
+    <div data-page>
+      <div class="page page--wide">
+        <!-- 1 · Patient Summary -->
+        <section class="card" aria-label="ملخّص المريض">
+          <div class="card__body">
+            <div class="patient-header">
+              <div class="patient-header__main">
+                <span class="avatar avatar--lg" aria-hidden="true">أغ</span>
+                <div class="patient-header__text">
+                  <span class="patient-header__name">أحمد عبدالله الغامدي</span>
+                  <span class="patient-header__sub">رقم الملف الطبي: MRN-88214</span>
+                </div>
+              </div>
+              <div class="patient-header__side">
+                <span class="badge badge--warning" data-i18n="status.inProgress">قيد الكشف</span>
+                <span class="patient-header__checkin">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  بدأت الاستشارة: ١٠:٤٠ صباحًا
+                </span>
+              </div>
+            </div>
+
+            <dl class="detail-list">
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="field.apptNo">رقم الموعد</dt>
+                <dd class="detail-list__value detail-list__value--code">APT-20260730-0428</dd>
+              </div>
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="field.clinic">العيادة</dt>
+                <dd class="detail-list__value" data-i18n="clinic.internalFloor2">عيادة الباطنة — الدور الثاني</dd>
+              </div>
+              <div class="detail-list__row">
+                <dt class="detail-list__label" data-i18n="field.doctor">الطبيب</dt>
+                <dd class="detail-list__value">د. سارة المنصور</dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- 2 · Selected Services (rendered by review.js from the treatment plan) -->
+        <section class="card" aria-label="الخدمات المختارة">
+          <div class="card__body">
+            <h2 class="card__heading">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 14h6"/><path d="M12 11v6"/></svg>
+              <span data-i18n="review.selectedServices">الخدمات المختارة</span>
+            </h2>
+
+            <div class="table-wrap" data-services-table>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="table.service">الخدمة</th>
+                    <th scope="col" data-i18n="table.category">التصنيف</th>
+                    <th scope="col" data-i18n="table.quantity">الكمية</th>
+                    <th scope="col" data-i18n="table.unitPrice">سعر الوحدة</th>
+                    <th scope="col" data-i18n="table.total">الإجمالي</th>
+                    <th scope="col" class="table__action" data-i18n="table.remove">إزالة</th>
+                  </tr>
+                </thead>
+                <tbody data-plan-rows></tbody>
+              </table>
+            </div>
+
+            <div class="alert alert--info" data-empty hidden role="note">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <div class="alert__body">
+                <span data-i18n="review.empty">لم تعد هناك خدمات في خطة العلاج. عُد إلى الكتالوج لإضافة الخدمات قبل الإرسال.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 · Consultation Notes -->
+        <section class="card" aria-label="ملاحظات الاستشارة">
+          <div class="card__body">
+            <div class="field">
+              <label class="label" for="notes" data-i18n="review.notesLabel">ملاحظات الاستشارة (اختياري)</label>
+              <textarea class="textarea" id="notes" name="notes" rows="4" placeholder="أضف ملاحظات داخلية حول خطة العلاج..." data-i18n-placeholder="review.notesPlaceholder"></textarea>
+              <span class="hint" data-i18n="review.notesHint">تظهر هذه الملاحظات للطاقم الطبي داخليًا فقط، ولا تُرسل إلى المريض.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4 · Cost Summary -->
+        <section class="card" aria-label="ملخّص التكلفة">
+          <div class="card__body">
+            <div class="cost-summary">
+              <div class="cost-summary__item">
+                <span class="cost-summary__label" data-i18n="review.count">عدد الخدمات المختارة</span>
+                <span class="cost-summary__value" data-service-count>٠</span>
+              </div>
+              <div class="cost-summary__item cost-summary__item--total">
+                <span class="cost-summary__label" data-i18n="review.total">الإجمالي التقديري (ر.س)</span>
+                <span class="cost-summary__value" data-total-amount>٠ ر.س</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5 · Actions -->
+        <div class="page-actions">
+          <a class="btn btn--primary btn--lg" href="success.html" data-submit data-i18n="review.save">حفظ وإرسال</a>
+          <a class="btn btn--outline btn--lg" href="treatment-plan.html" data-i18n="review.backEdit">العودة لتعديل الخدمات</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../layouts/layout.js"></script>
+    <script src="../../scripts/review.js"></script>
+  </body>
+</html>

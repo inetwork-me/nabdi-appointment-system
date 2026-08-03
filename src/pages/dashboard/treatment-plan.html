@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="docTitle.treatmentPlan">إعداد خطة العلاج — بوابة الطاقم الطبي</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/base.css" />
+    <link rel="stylesheet" href="../../components/components.css" />
+    <link rel="stylesheet" href="../../layouts/dashboard-layout.css" />
+      <script src="../../scripts/i18n.js"></script>
+  </head>
+  <body data-layout="dashboard" data-nav="visits" data-title="إعداد خطة العلاج" data-subtitle="اختر الخدمات العلاجية للمريض" data-title-key="pages.treatmentPlan.title" data-subtitle-key="pages.treatmentPlan.subtitle">
+    <div data-page>
+      <div class="page page--full">
+        <!-- Persistent consultation header -->
+        <header class="consult-header">
+          <div class="consult-header__patient">
+            <span class="avatar" aria-hidden="true">أغ</span>
+            <div class="consult-header__id">
+              <span class="consult-header__name">أحمد عبدالله الغامدي</span>
+              <span class="consult-header__sub">MRN-88214 · APT-20260730-0428</span>
+            </div>
+          </div>
+          <dl class="consult-header__meta">
+            <div><dt data-i18n="field.clinic">العيادة</dt><dd>عيادة الباطنة</dd></div>
+            <div><dt data-i18n="field.doctor">الطبيب</dt><dd>د. سارة المنصور</dd></div>
+          </dl>
+          <div class="consult-header__status">
+            <span class="badge badge--warning" data-i18n="status.inProgress">قيد الكشف</span>
+            <span class="consult-header__time" data-i18n="consult.startedAt">بدأت الاستشارة ١٠:٤٠ صباحًا</span>
+          </div>
+        </header>
+
+        <div class="consult-layout">
+          <!-- LEFT · Medical categories -->
+          <aside class="consult-col" aria-label="التصنيفات" data-i18n-aria-label="consult.categories">
+            <nav class="category-list">
+              <button class="category-item is-active" type="button" data-category="all" data-i18n="cat.all">جميع الخدمات</button>
+              <button class="category-item" type="button" data-category="general" data-i18n="cat.general">طب الأسنان العام</button>
+              <button class="category-item" type="button" data-category="endodontics" data-i18n="cat.endodontics">علاج العصب</button>
+              <button class="category-item" type="button" data-category="orthodontics" data-i18n="cat.orthodontics">تقويم الأسنان</button>
+              <button class="category-item" type="button" data-category="prosthodontics" data-i18n="cat.prosthodontics">التركيبات</button>
+              <button class="category-item" type="button" data-category="oral-surgery" data-i18n="cat.oralSurgery">جراحة الفم</button>
+              <button class="category-item" type="button" data-category="radiology" data-i18n="cat.radiology">الأشعة</button>
+            </nav>
+          </aside>
+
+          <!-- CENTER · Medical services -->
+          <div class="consult-services" aria-label="الخدمات الطبية" data-i18n-aria-label="section.medical">
+            <div class="search-field">
+              <span class="search-field__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+              <input class="input" type="search" placeholder="ابحث عن خدمة..." data-search autocomplete="off" aria-label="بحث عن خدمة" data-i18n-placeholder="consult.searchPlaceholder" data-i18n-aria-label="aria.search" />
+            </div>
+
+            <div class="service-cards">
+              <!-- General dentistry -->
+              <label class="service-card" data-id="cleaning" data-name-key="catalog.svc.cleaning" data-cat-key="cat.generalShort" data-category="general" data-name="تنظيف وتلميع الأسنان" data-cat="طب عام" data-price="200" data-desc="إزالة الجير والتصبغات وتلميع الأسنان.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.cleaning">تنظيف وتلميع الأسنان</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.cleaning.desc">إزالة الجير والتصبغات وتلميع الأسنان.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">٢٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="filling" data-name-key="catalog.svc.composite" data-cat-key="cat.generalShort" data-category="general" data-name="حشو تجميلي (كمبوزيت)" data-cat="طب عام" data-price="250" data-desc="حشو بلون السن لعلاج التسوّس.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.composite">حشو تجميلي (كمبوزيت)</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.composite.desc">حشو بلون السن لعلاج التسوّس.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">٢٥٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="checkup" data-name-key="catalog.svc.exam" data-cat-key="cat.generalShort" data-category="general" data-name="فحص وتشخيص شامل" data-cat="طب عام" data-price="150" data-desc="فحص سريري مع خطة علاجية مبدئية.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.exam">فحص وتشخيص شامل</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.exam.desc">فحص سريري مع خطة علاجية مبدئية.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">١٥٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <!-- Endodontics -->
+              <label class="service-card" data-id="root-canal" data-name-key="catalog.svc.rootCanal" data-cat-key="cat.endodontics" data-category="endodontics" data-name="علاج عصب (قناة الجذر)" data-cat="علاج العصب" data-price="900" data-desc="إزالة العصب وتنظيف وحشو القنوات.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.rootCanal">علاج عصب (قناة الجذر)</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.rootCanal.desc">إزالة العصب وتنظيف وحشو القنوات.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.two"> جلستان</span></span>
+                    <span class="service-card__price">٩٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="retreatment" data-name-key="catalog.svc.rootCanalRetreat" data-cat-key="cat.endodontics" data-category="endodontics" data-name="إعادة علاج عصب" data-cat="علاج العصب" data-price="1100" data-desc="إعادة معالجة قناة جذر سبق علاجها.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.rootCanalRetreat">إعادة علاج عصب</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.rootCanalRetreat.desc">إعادة معالجة قناة جذر سبق علاجها.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.two"> جلستان</span></span>
+                    <span class="service-card__price">١٬١٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <!-- Orthodontics -->
+              <label class="service-card" data-id="braces-metal" data-name-key="catalog.svc.metalBraces" data-cat-key="cat.orthoShort" data-category="orthodontics" data-name="تقويم أسنان معدني" data-cat="تقويم" data-price="6500" data-desc="تقويم ثابت لتصحيح اصطفاف الأسنان.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.metalBraces">تقويم أسنان معدني</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.metalBraces.desc">تقويم ثابت لتصحيح اصطفاف الأسنان.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.multi"> متعددة الجلسات</span></span>
+                    <span class="service-card__price">٦٬٥٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="braces-clear" data-name-key="catalog.svc.clearAligners" data-cat-key="cat.orthoShort" data-category="orthodontics" data-name="تقويم شفاف" data-cat="تقويم" data-price="9500" data-desc="قوالب شفافة قابلة للإزالة.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.clearAligners">تقويم شفاف</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.clearAligners.desc">قوالب شفافة قابلة للإزالة.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.multi"> متعددة الجلسات</span></span>
+                    <span class="service-card__price">٩٬٥٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <!-- Prosthodontics -->
+              <label class="service-card" data-id="crown" data-name-key="catalog.svc.crown" data-cat-key="cat.prosthoShort" data-category="prosthodontics" data-name="تركيب تاج خزفي" data-cat="تركيبات" data-price="1500" data-desc="تاج لحماية السن المتضرر واستعادة شكله.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.crown">تركيب تاج خزفي</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.crown.desc">تاج لحماية السن المتضرر واستعادة شكله.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.two"> جلستان</span></span>
+                    <span class="service-card__price">١٬٥٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="bridge" data-name-key="catalog.svc.bridge" data-cat-key="cat.prosthoShort" data-category="prosthodontics" data-name="جسر أسنان ثابت" data-cat="تركيبات" data-price="3000" data-desc="تعويض سن مفقود بجسر ثلاثي الوحدات.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.bridge">جسر أسنان ثابت</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.bridge.desc">تعويض سن مفقود بجسر ثلاثي الوحدات.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.three"> ٣ جلسات</span></span>
+                    <span class="service-card__price">٣٬٠٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="veneer" data-name-key="catalog.svc.veneer" data-cat-key="cat.prosthoShort" data-category="prosthodontics" data-name="فينير تجميلي" data-cat="تركيبات" data-price="1800" data-desc="قشرة خزفية لتحسين مظهر الأسنان الأمامية.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.veneer">فينير تجميلي</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.veneer.desc">قشرة خزفية لتحسين مظهر الأسنان الأمامية.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.two"> جلستان</span></span>
+                    <span class="service-card__price">١٬٨٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <!-- Oral surgery -->
+              <label class="service-card" data-id="extraction" data-name-key="catalog.svc.simpleExtraction" data-cat-key="cat.oralSurgery" data-category="oral-surgery" data-name="خلع سن بسيط" data-cat="جراحة الفم" data-price="300" data-desc="خلع اعتيادي للسن تحت تخدير موضعي.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.simpleExtraction">خلع سن بسيط</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.simpleExtraction.desc">خلع اعتيادي للسن تحت تخدير موضعي.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">٣٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="implant" data-name-key="catalog.svc.implant" data-cat-key="cat.oralSurgery" data-category="oral-surgery" data-name="زراعة سن" data-cat="جراحة الفم" data-price="5500" data-desc="زرعة تيتانيوم مع تاج فوقها.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.implant">زراعة سن</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.implant.desc">زرعة تيتانيوم مع تاج فوقها.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.multi"> متعددة الجلسات</span></span>
+                    <span class="service-card__price">٥٬٥٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="wisdom" data-name-key="catalog.svc.wisdomExtraction" data-cat-key="cat.oralSurgery" data-category="oral-surgery" data-name="خلع ضرس العقل جراحيًا" data-cat="جراحة الفم" data-price="800" data-desc="خلع جراحي لضرس عقل منطمر.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.wisdomExtraction">خلع ضرس العقل جراحيًا</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.wisdomExtraction.desc">خلع جراحي لضرس عقل منطمر.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">٨٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <!-- Radiology -->
+              <label class="service-card" data-id="panoramic" data-name-key="catalog.svc.panoramic" data-cat-key="cat.radiologyShort" data-category="radiology" data-name="أشعة بانوراما" data-cat="أشعة" data-price="180" data-desc="صورة شاملة للفكين والأسنان.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.panoramic">أشعة بانوراما</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.panoramic.desc">صورة شاملة للفكين والأسنان.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">١٨٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+
+              <label class="service-card" data-id="cbct" data-name-key="catalog.svc.cbct" data-cat-key="cat.radiologyShort" data-category="radiology" data-name="أشعة مقطعية ثلاثية الأبعاد (CBCT)" data-cat="أشعة" data-price="400" data-desc="تصوير مقطعي دقيق للتخطيط الجراحي.">
+                <input type="checkbox" data-service />
+                <span class="checkbox__box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span class="service-card__body">
+                  <span class="service-card__name" data-i18n="catalog.svc.cbct">أشعة مقطعية ثلاثية الأبعاد (CBCT)</span>
+                  <span class="service-card__desc" data-i18n="catalog.svc.cbct.desc">تصوير مقطعي دقيق للتخطيط الجراحي.</span>
+                  <span class="service-card__meta">
+                    <span class="service-card__sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="sessions.one"> جلسة واحدة</span></span>
+                    <span class="service-card__price">٤٠٠ ر.س</span>
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <p class="services-empty" data-services-empty hidden data-i18n="consult.emptyServices">لا توجد خدمات مطابقة.</p>
+          </div>
+
+          <!-- RIGHT · Treatment plan (sticky) -->
+          <aside class="consult-plan" aria-label="خطة العلاج" data-i18n-aria-label="plan.title">
+            <div class="card treatment-plan">
+              <div class="card__body">
+                <div class="treatment-plan__head">
+                  <h2 class="card__heading" data-i18n="plan.title">خطة العلاج</h2>
+                  <span class="badge badge--muted"><span data-plan-count>٠</span> <span data-i18n="plan.count">خدمة</span></span>
+                </div>
+
+                <div class="treatment-plan__items" data-plan-items hidden></div>
+
+                <div class="treatment-plan__empty" data-plan-empty>
+                  <p class="hint" data-i18n="plan.empty">حدّد الخدمات من القائمة لإضافتها إلى خطة العلاج.</p>
+                </div>
+
+                <div class="treatment-plan__total">
+                  <span class="treatment-plan__total-label" data-i18n="plan.total">الإجمالي التقديري</span>
+                  <span class="treatment-plan__total-value" data-plan-total>٠ ر.س</span>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="notes" data-i18n="plan.notes">ملاحظات داخلية</label>
+                  <textarea class="textarea" id="notes" data-plan-notes rows="3" placeholder="ملاحظات للطاقم الطبي (لا تظهر للمريض)..." data-i18n-placeholder="plan.notesPlaceholder"></textarea>
+                </div>
+
+                <a class="btn btn--primary btn--lg btn--block is-disabled" href="review.html" data-review aria-disabled="true" data-i18n="plan.review">مراجعة خطة العلاج</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../layouts/layout.js"></script>
+    <script src="../../scripts/treatment-plan.js"></script>
+  </body>
+</html>
