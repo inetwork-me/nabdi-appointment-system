@@ -225,148 +225,14 @@
     });
     if (search) search.addEventListener("input", applyFilter);
 
-    // Add service — search the catalog first; create a manual service only
-    // when nothing suitable exists (prevents duplicate services from differing
-    // naming). Both steps share one dialog. Manual items live in the same
-    // `plan` map, flagged `manual`, so they carry a "review" badge and reach
-    // the success message downstream.
+    // Manual service — exception form (dialog) for treatments not yet in the
+    // catalog. Clicking "إضافة خدمة يدوية" opens the form directly. Added items
+    // live in the same `plan` map, flagged `manual`, so they carry a "review"
+    // badge and reach the success message downstream.
     var manualDialog = document.querySelector("[data-manual-dialog]");
     var manualForm = document.querySelector("[data-manual-form]");
     var manualOpen = document.querySelector("[data-manual-open]");
-    var searchStep = manualDialog
-      ? manualDialog.querySelector('[data-manual-step="search"]')
-      : null;
-    var manualSearch = document.querySelector("[data-manual-search]");
-    var resultsEl = document.querySelector("[data-manual-results]");
-    var suggestEl = document.querySelector("[data-manual-suggest]");
-    var suggestListEl = document.querySelector("[data-manual-suggest-list]");
-    var emptyEl = document.querySelector("[data-manual-empty]");
-    var promptEl = document.querySelector("[data-manual-prompt]");
-    var createWrap = document.querySelector("[data-manual-create-wrap]");
-    var stillNote = document.querySelector("[data-manual-still-note]");
-    var createBtn = document.querySelector("[data-manual-create]");
     var manualSeq = 0;
-
-    var CAL_ICON =
-      '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>';
-
-    // Catalog index built from the existing service cards (single source of
-    // truth — no duplicated data).
-    var CATALOG = cards.map(function (card) {
-      var sessEl = card.querySelector(".service-card__sessions [data-i18n]");
-      return {
-        id: card.getAttribute("data-id"),
-        nameKey: card.getAttribute("data-name-key"),
-        catKey: card.getAttribute("data-cat-key"),
-        sessionsKey: sessEl ? sessEl.getAttribute("data-i18n") : "",
-        price: Number(card.getAttribute("data-price")) || 0,
-        dataName: card.getAttribute("data-name") || "",
-        dataDesc: card.getAttribute("data-desc") || "",
-        dataCat: card.getAttribute("data-cat") || "",
-      };
-    });
-    // Search haystack = static Arabic text + active-language translations, so a
-    // query matches whichever language the doctor types in.
-    function haystack(c) {
-      return norm(
-        c.dataName + " " + c.dataDesc + " " + c.dataCat + " " +
-          T(c.nameKey) + " " + T(c.catKey)
-      );
-    }
-    function resultHtml(c) {
-      return (
-        '<div class="plan-item">' +
-        '<div class="plan-item__top">' +
-        '<span class="plan-item__name">' + T(c.nameKey) + "</span>" +
-        '<span class="badge badge--muted">' + T(c.catKey) + "</span>" +
-        "</div>" +
-        '<div class="plan-item__bottom">' +
-        '<span class="service-card__sessions">' + CAL_ICON +
-        "<span>" + (c.sessionsKey ? T(c.sessionsKey) : "") + "</span></span>" +
-        '<span class="plan-item__subtotal">' + money(c.price) + "</span>" +
-        "</div>" +
-        '<button class="btn btn--primary btn--block" type="button" data-use-service="' +
-        c.id + '">' + T("manualSearch.use", "استخدام هذه الخدمة") + "</button>" +
-        "</div>"
-      );
-    }
-
-    function hideEl(el) {
-      if (el) el.hidden = true;
-    }
-    function showEl(el) {
-      if (el) el.hidden = false;
-    }
-
-    function renderSearch() {
-      var q = norm((manualSearch && manualSearch.value) || "");
-      hideEl(resultsEl);
-      if (resultsEl) resultsEl.innerHTML = "";
-      hideEl(suggestEl);
-      if (suggestListEl) suggestListEl.innerHTML = "";
-      hideEl(emptyEl);
-      hideEl(createWrap);
-      hideEl(stillNote);
-      hideEl(promptEl);
-
-      if (!q) {
-        showEl(promptEl);
-        return;
-      }
-
-      var direct = CATALOG.filter(function (c) {
-        return haystack(c).indexOf(q) !== -1;
-      });
-      if (direct.length) {
-        if (resultsEl) resultsEl.innerHTML = direct.map(resultHtml).join("");
-        showEl(resultsEl);
-        return;
-      }
-
-      // No direct match — surface close "did you mean" matches by token overlap,
-      // then always offer to create a new manual service.
-      var tokens = q.split(/\s+/).filter(Boolean);
-      var scored = CATALOG.map(function (c) {
-        var h = haystack(c);
-        var score = tokens.reduce(function (s, t) {
-          return s + (t && h.indexOf(t) !== -1 ? 1 : 0);
-        }, 0);
-        return { c: c, score: score };
-      })
-        .filter(function (x) {
-          return x.score > 0;
-        })
-        .sort(function (a, b) {
-          return b.score - a.score;
-        })
-        .slice(0, 6);
-
-      if (scored.length) {
-        if (suggestListEl)
-          suggestListEl.innerHTML = scored
-            .map(function (x) {
-              return resultHtml(x.c);
-            })
-            .join("");
-        showEl(suggestEl);
-        showEl(stillNote);
-      } else {
-        showEl(emptyEl);
-      }
-      showEl(createWrap);
-    }
-
-    function showStep(step) {
-      if (searchStep) searchStep.hidden = step !== "search";
-      if (manualForm) manualForm.hidden = step !== "form";
-      if (manualDialog) {
-        Array.prototype.slice
-          .call(manualDialog.querySelectorAll("[data-manual-head]"))
-          .forEach(function (h) {
-            h.hidden = h.getAttribute("data-manual-head") !== step;
-          });
-      }
-    }
 
     function clearInvalid() {
       if (!manualForm) return;
@@ -380,12 +246,6 @@
       if (manualForm) manualForm.reset();
       clearInvalid();
     }
-    function resetDialog() {
-      if (manualSearch) manualSearch.value = "";
-      resetManualForm();
-      showStep("search");
-      renderSearch();
-    }
     function closeManual() {
       if (manualDialog && typeof manualDialog.close === "function")
         manualDialog.close();
@@ -393,36 +253,11 @@
 
     if (manualOpen && manualDialog) {
       manualOpen.addEventListener("click", function () {
-        resetDialog();
+        resetManualForm();
         if (typeof manualDialog.showModal === "function")
           manualDialog.showModal();
-        if (manualSearch) manualSearch.focus();
-      });
-    }
-    if (manualSearch) manualSearch.addEventListener("input", renderSearch);
-
-    // "استخدام هذه الخدمة" — reuse an existing catalog service (adds it exactly
-    // like ticking its card, keeping the catalog list in sync), then close.
-    if (searchStep) {
-      searchStep.addEventListener("click", function (e) {
-        var btn = e.target.closest("[data-use-service]");
-        if (!btn) return;
-        var id = btn.getAttribute("data-use-service");
-        var card = document.querySelector('.service-card[data-id="' + id + '"]');
-        if (card) setSelected(card, true);
-        closeManual();
-      });
-    }
-    // Reveal the manual form only after the doctor chooses to create a new one.
-    if (createBtn) {
-      createBtn.addEventListener("click", function () {
-        showStep("form");
         var nameEl = manualForm && manualForm.querySelector("[data-manual-name]");
-        if (nameEl) {
-          var q = manualSearch ? manualSearch.value.trim() : "";
-          if (q && !nameEl.value) nameEl.value = q; // carry the search term over
-          nameEl.focus();
-        }
+        if (nameEl) nameEl.focus();
       });
     }
     if (manualDialog) {
@@ -436,8 +271,8 @@
       manualDialog.addEventListener("click", function (e) {
         if (e.target === manualDialog) closeManual();
       });
-      // Reset to the search step on any close (buttons, backdrop, native Esc)
-      manualDialog.addEventListener("close", resetDialog);
+      // Reset the form on any close (buttons, backdrop, native Esc)
+      manualDialog.addEventListener("close", resetManualForm);
     }
     if (manualForm) {
       manualForm.addEventListener("submit", function (e) {
@@ -523,8 +358,6 @@
     document.addEventListener("i18n:changed", function () {
       formatCardPrices();
       renderPlan();
-      // Keep open search results/labels/prices in the active language.
-      if (manualDialog && manualDialog.open) renderSearch();
     });
   });
 })();

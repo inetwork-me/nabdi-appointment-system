@@ -978,22 +978,6 @@
     flex: 1;
   }
 }
-/* Dialog step — a vertical section inside a multi-step dialog body */
-.dialog__step {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-/* Scrollable list of catalog matches inside the manual-service dialog.
-   Reuses .plan-item rows for each result — no bespoke result component. */
-.manual-results {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  max-height: 15rem;
-  overflow-y: auto;
-}
-
 /* Manual-service dialog — cap the height and keep the action buttons pinned
    to the bottom so they stay visible while the form content scrolls. Scoped
    to the dialog via its data hook; the base Dialog component is untouched. */
@@ -1015,9 +999,4 @@
   border-top: 1px solid var(--border);
   background-color: var(--card);
   box-shadow: 0 -4px 12px -6px rgb(10 10 10 / 0.12);
-}
-/* An inactive step / conditional block must hide even though its component
-   class sets display:flex. Scoped to this dialog only. */
-[data-manual-dialog] [hidden] {
-  display: none !important;
 }

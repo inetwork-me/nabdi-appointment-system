@@ -367,14 +367,5 @@
   "manual.pricePlaceholder": "e.g. 300",
   "manual.categoryPlaceholder": "e.g. Periodontics",
   "manual.sessionsPlaceholder": "e.g. 1",
-  "success.manualInfo": "The treatment plan has been sent successfully. Any manually added services will be reviewed by the Nabd team. Once approved, they will be added to the system and sent to the patient.",
-  "manualSearch.title": "Search for a service",
-  "manualSearch.desc": "Search the services catalog before creating a new service to avoid duplicates.",
-  "manualSearch.label": "Search for a service",
-  "manualSearch.prompt": "Start typing to search the services catalog.",
-  "manualSearch.didYouMean": "Did you mean?",
-  "manualSearch.use": "Use this service",
-  "manualSearch.empty": "No matching service was found. You can add a new service for review by the Nabd team.",
-  "manualSearch.createNew": "Add a new service",
-  "manualSearch.stillNoMatch": "Didn't find the right service?"
+  "success.manualInfo": "The treatment plan has been sent successfully. Any manually added services will be reviewed by the Nabd team. Once approved, they will be added to the system and sent to the patient."
 }

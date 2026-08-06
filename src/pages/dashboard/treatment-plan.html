@@ -306,93 +306,47 @@
     <!-- Add service — search the catalog first, create a manual service only
          when nothing suitable exists. Two steps share one dialog. -->
     <dialog class="dialog" data-manual-dialog aria-labelledby="manual-dialog-title">
-      <div class="dialog__body">
+      <form class="dialog__body" data-manual-form>
         <div class="dialog__head">
           <div>
-            <!-- Step 1 (search) heading -->
-            <h2 class="dialog__title" id="manual-dialog-title" data-manual-head="search" data-i18n="manualSearch.title">البحث عن خدمة</h2>
-            <p class="dialog__desc" data-manual-head="search" data-i18n="manualSearch.desc">ابحث في كتالوج الخدمات قبل إضافة خدمة جديدة لتفادي التكرار.</p>
-            <!-- Step 2 (manual form) heading -->
-            <h2 class="dialog__title" data-manual-head="form" data-i18n="manual.add" hidden>إضافة خدمة يدوية</h2>
-            <p class="dialog__desc" data-manual-head="form" data-i18n="manual.reviewNote" hidden>سيتم مراجعتها من قبل فريق نبضي</p>
+            <h2 class="dialog__title" id="manual-dialog-title" data-i18n="manual.add">إضافة خدمة يدوية</h2>
+            <p class="dialog__desc" data-i18n="manual.reviewNote">سيتم مراجعتها من قبل فريق نبضي</p>
           </div>
           <button class="icon-btn" type="button" data-manual-close data-i18n-aria-label="aria.close" aria-label="إغلاق">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
 
-        <!-- STEP 1 · Search the existing catalog -->
-        <div class="dialog__step" data-manual-step="search">
-          <div class="field">
-            <label class="label" for="manual-search" data-i18n="manualSearch.label">ابحث عن خدمة</label>
-            <div class="search-field">
-              <span class="search-field__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-              <input class="input" id="manual-search" type="search" data-manual-search autocomplete="off" placeholder="ابحث عن خدمة..." data-i18n-placeholder="consult.searchPlaceholder" />
-            </div>
-          </div>
-
-          <p class="hint" data-manual-prompt data-i18n="manualSearch.prompt">ابدأ بالكتابة للبحث في كتالوج الخدمات.</p>
-
-          <!-- Direct matches -->
-          <div class="manual-results" data-manual-results hidden></div>
-
-          <!-- "Did you mean?" close matches -->
-          <div data-manual-suggest hidden>
-            <p class="hint" data-i18n="manualSearch.didYouMean">هل تقصد؟</p>
-            <div class="manual-results" data-manual-suggest-list></div>
-          </div>
-
-          <!-- No match at all -->
-          <div class="alert alert--info" data-manual-empty hidden role="note">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-            <div class="alert__body">
-              <span data-i18n="manualSearch.empty">لم يتم العثور على خدمة مطابقة. يمكنك إضافة خدمة جديدة ليتم مراجعتها من قبل فريق نبضي.</span>
-            </div>
-          </div>
-
-          <!-- Create-new affordance (only when no direct match) -->
-          <div class="field" data-manual-create-wrap hidden>
-            <p class="hint" data-manual-still-note hidden data-i18n="manualSearch.stillNoMatch">لم تجد الخدمة المناسبة؟</p>
-            <button class="btn btn--outline btn--block" type="button" data-manual-create>
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-              <span data-i18n="manualSearch.createNew">إضافة خدمة جديدة</span>
-            </button>
-          </div>
+        <div class="field">
+          <label class="label" for="manual-name" data-i18n="manual.serviceName">اسم الخدمة</label>
+          <input class="input" id="manual-name" type="text" data-manual-name required autocomplete="off" placeholder="مثال: تنظيف لثة عميق" data-i18n-placeholder="manual.namePlaceholder" />
         </div>
 
-        <!-- STEP 2 · Manual service form -->
-        <form class="dialog__step" data-manual-step="form" data-manual-form hidden>
-          <div class="field">
-            <label class="label" for="manual-name" data-i18n="manual.serviceName">اسم الخدمة</label>
-            <input class="input" id="manual-name" type="text" data-manual-name required autocomplete="off" placeholder="مثال: تنظيف لثة عميق" data-i18n-placeholder="manual.namePlaceholder" />
-          </div>
+        <div class="field">
+          <label class="label" for="manual-price" data-i18n="manual.servicePrice">سعر الخدمة (ر.س)</label>
+          <input class="input" id="manual-price" type="number" min="0" step="1" inputmode="numeric" data-manual-price required autocomplete="off" placeholder="مثال: ٣٠٠" data-i18n-placeholder="manual.pricePlaceholder" />
+        </div>
 
-          <div class="field">
-            <label class="label" for="manual-price" data-i18n="manual.servicePrice">سعر الخدمة (ر.س)</label>
-            <input class="input" id="manual-price" type="number" min="0" step="1" inputmode="numeric" data-manual-price required autocomplete="off" placeholder="مثال: ٣٠٠" data-i18n-placeholder="manual.pricePlaceholder" />
-          </div>
+        <div class="field">
+          <label class="label" for="manual-cat" data-i18n="manual.category">الفئة</label>
+          <input class="input" id="manual-cat" type="text" data-manual-cat autocomplete="off" placeholder="مثال: طب اللثة" data-i18n-placeholder="manual.categoryPlaceholder" />
+        </div>
 
-          <div class="field">
-            <label class="label" for="manual-cat" data-i18n="manual.category">الفئة</label>
-            <input class="input" id="manual-cat" type="text" data-manual-cat autocomplete="off" placeholder="مثال: طب اللثة" data-i18n-placeholder="manual.categoryPlaceholder" />
-          </div>
+        <div class="field">
+          <label class="label" for="manual-sessions" data-i18n="manual.sessions">عدد الجلسات</label>
+          <input class="input" id="manual-sessions" type="number" min="1" step="1" inputmode="numeric" data-manual-sessions autocomplete="off" placeholder="مثال: ١" data-i18n-placeholder="manual.sessionsPlaceholder" />
+        </div>
 
-          <div class="field">
-            <label class="label" for="manual-sessions" data-i18n="manual.sessions">عدد الجلسات</label>
-            <input class="input" id="manual-sessions" type="number" min="1" step="1" inputmode="numeric" data-manual-sessions autocomplete="off" placeholder="مثال: ١" data-i18n-placeholder="manual.sessionsPlaceholder" />
-          </div>
+        <div class="field">
+          <label class="label" for="manual-notes" data-i18n="manual.notes">ملاحظات داخلية</label>
+          <textarea class="textarea" id="manual-notes" rows="3" data-manual-notes placeholder="ملاحظات للطاقم الطبي (لا تظهر للمريض)..." data-i18n-placeholder="plan.notesPlaceholder"></textarea>
+        </div>
 
-          <div class="field">
-            <label class="label" for="manual-notes" data-i18n="manual.notes">ملاحظات داخلية</label>
-            <textarea class="textarea" id="manual-notes" rows="3" data-manual-notes placeholder="ملاحظات للطاقم الطبي (لا تظهر للمريض)..." data-i18n-placeholder="plan.notesPlaceholder"></textarea>
-          </div>
-
-          <div class="dialog__actions">
-            <button class="btn btn--outline" type="button" data-manual-close data-i18n="common.cancel">إلغاء</button>
-            <button class="btn btn--primary" type="submit" data-i18n="manual.addToPlan">إضافة للخطة</button>
-          </div>
-        </form>
-      </div>
+        <div class="dialog__actions">
+          <button class="btn btn--outline" type="button" data-manual-close data-i18n="common.cancel">إلغاء</button>
+          <button class="btn btn--primary" type="submit" data-i18n="manual.addToPlan">إضافة للخطة</button>
+        </div>
+      </form>
     </dialog>
 
     <script src="../../layouts/layout.js"></script>
