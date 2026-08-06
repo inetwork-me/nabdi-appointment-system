@@ -41,22 +41,40 @@
     return isEn() ? cur + " " + n : toArabic(n) + " " + cur;
   }
 
+  function escapeHtml(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[c];
+    });
+  }
+
   // Older handoffs may carry resolved names (name/cat) instead of keys;
-  // keep them working by falling back to the literal string.
+  // keep them working by falling back to the literal string. Manual services
+  // carry literal (user-entered) name/cat, so those are HTML-escaped.
   function nameOf(it) {
-    return it.nameKey ? T(it.nameKey) : it.name || "";
+    return it.nameKey ? T(it.nameKey) : escapeHtml(it.name || "");
   }
   function catOf(it) {
-    return it.catKey ? T(it.catKey) : it.cat || "";
+    return it.catKey ? T(it.catKey) : escapeHtml(it.cat || "");
   }
 
   function rowHtml(it) {
     var line = it.price * it.qty;
+    var manualBadge = it.manual
+      ? ' <span class="badge badge--warning">' +
+        T("manual.badgePending", "قيد المراجعة") +
+        "</span>"
+      : "";
     return (
       '<tr data-service-row data-id="' + it.id +
       '" data-name-key="' + (it.nameKey || "") + '" data-cat-key="' + (it.catKey || "") +
       '" data-price="' + it.price + '" data-qty="' + it.qty + '">' +
-      "<td>" + nameOf(it) + "</td>" +
+      "<td>" + nameOf(it) + manualBadge + "</td>" +
       '<td><span class="badge badge--muted">' + catOf(it) + "</span></td>" +
       '<td class="table__num">' + num(it.qty) + "</td>" +
       '<td class="table__num">' + money(it.price) + "</td>" +

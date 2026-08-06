@@ -25,20 +25,28 @@
               </div>
 
               <header class="page__header">
-                <h2 class="page__title" data-i18n="success.title">تم حفظ الطلب وإرساله بنجاح</h2>
-                <p class="page__subtitle" data-i18n="success.desc">أصبحت الخدمات الإضافية متاحة في تطبيق المريض للموافقة والدفع. لا حاجة لأي إجراء إضافي من الطاقم الطبي.</p>
+                <h2 class="page__title" data-i18n="success.title" data-success-title>تم حفظ الطلب وإرساله بنجاح</h2>
+                <p class="page__subtitle" data-i18n="success.desc" data-success-desc>أصبحت الخدمات الإضافية متاحة في تطبيق المريض للموافقة والدفع. لا حاجة لأي إجراء إضافي من الطاقم الطبي.</p>
               </header>
 
               <div class="patient-chip">
                 <span class="avatar" aria-hidden="true">أغ</span>
                 <span class="patient-chip__text">
                   <span class="patient-chip__name">أحمد عبدالله الغامدي</span>
-                  <span class="patient-chip__meta"><span data-success-count>٣</span> <span data-i18n="success.servicesWord">خدمات</span> · <span data-i18n="success.totalWord">الإجمالي</span> <span data-success-total>٢٦٠٠ ر.س</span></span>
+                  <span class="patient-chip__meta" data-success-meta><span data-success-count>٣</span> <span data-i18n="success.servicesWord">خدمات</span> · <span data-i18n="success.totalWord">الإجمالي</span> <span data-success-total>٢٦٠٠ ر.س</span></span>
                 </span>
                 <span class="badge badge--success">
                   <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                   <span data-i18n="status.sent">أُرسل</span>
                 </span>
+              </div>
+
+              <!-- Shown only when the plan contains manually added services -->
+              <div class="alert alert--info" data-success-manual hidden role="note">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                <div class="alert__body">
+                  <span data-i18n="success.manualInfo">تم إرسال خطة العلاج إلى حساب المريض بنجاح. الخدمات المضافة يدويًا سيتم مراجعتها من قبل فريق نبضي، وبعد اعتمادها سيتم إضافتها إلى النظام وإرسالها للمريض.</span>
+                </div>
               </div>
 
               <div class="result__actions">

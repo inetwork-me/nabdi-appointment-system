@@ -690,6 +690,65 @@ a.quick:hover {
 }
 
 /* --------------------------------------------------------------------- *
+ * Next Visit Type — large clickable choice cards
+ * Each card is a full anchor built on the shared .card surface; the head
+ * pairs a tonal .state-icon with a .badge, and a .btn acts as the visual
+ * primary action (the whole card is the link). Reuses existing tokens and
+ * components — no new colour, no duplicated control styles.
+ * --------------------------------------------------------------------- */
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 48rem) {
+  .choice-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.choice-card {
+  display: flex;
+  text-align: start;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.choice-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.choice-card:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--ring-subtle);
+}
+.choice-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+.choice-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.choice-card__title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--foreground);
+}
+.choice-card__desc {
+  margin-block-start: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+.choice-card__action {
+  margin-block-start: auto;
+}
+
+/* --------------------------------------------------------------------- *
  * Review Selected Services
  * --------------------------------------------------------------------- */
 /* Separate the identity header from the summary detail list */

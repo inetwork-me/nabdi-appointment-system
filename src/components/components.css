@@ -931,6 +931,9 @@
 .dialog {
   width: calc(100% - var(--space-8));
   max-width: 28rem;
+  /* Re-assert the centering margin the global `* { margin: 0 }` reset clears,
+     so the modal dialog stays centered in the viewport. */
+  margin: auto;
   padding: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -962,4 +965,92 @@
   font-size: var(--text-sm);
   color: var(--muted-foreground);
   line-height: 1.6;
+}
+/* Dialog footer — right-aligned action row (cancel / confirm) */
+.dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-block-start: var(--space-2);
+}
+@media (max-width: 32rem) {
+  .dialog__actions .btn {
+    flex: 1;
+  }
+}
+/* Dialog step — a vertical section inside a multi-step dialog body */
+.dialog__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+/* Independently scrolling content region inside a dialog step */
+.dialog__scroll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+/* Scrollable list of catalog matches inside the manual-service dialog.
+   Reuses .plan-item rows for each result — no bespoke result component. */
+.manual-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* --------------------------------------------------------------------- *
+ * Manual-service dialog layout — fixed header + search, independently
+ * scrolling content, and a pinned action footer. Caps at the viewport so
+ * the footer never scrolls out of view and no dead space is left below.
+ * Scoped to .dialog--manual so the base Dialog contract is untouched.
+ * --------------------------------------------------------------------- */
+.dialog--manual {
+  display: flex;
+  flex-direction: column;
+  max-height: min(90vh, 46rem);
+}
+.dialog--manual .dialog__body {
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.dialog--manual .dialog__head {
+  flex-shrink: 0;
+  padding: var(--space-6) var(--space-6) var(--space-4);
+}
+.dialog--manual .dialog__step {
+  flex: 1;
+  min-height: 0;
+  gap: var(--space-3);
+}
+/* The search field stays fixed; only the results/suggestions area scrolls */
+.dialog--manual .dialog__step[data-manual-step="search"] {
+  padding-inline: var(--space-6);
+}
+.dialog--manual .dialog__step[data-manual-step="search"] > .field {
+  flex-shrink: 0;
+}
+.dialog--manual .dialog__step[data-manual-step="search"] .dialog__scroll {
+  padding-block-end: var(--space-6);
+}
+/* Form fields scroll; the footer is a separate pinned sibling */
+.dialog--manual .dialog__step[data-manual-step="form"] {
+  gap: 0;
+}
+.dialog--manual .dialog__step[data-manual-step="form"] .dialog__scroll {
+  padding: 0 var(--space-6) var(--space-4);
+}
+/* Pinned footer — white surface, top border, elevation over the content */
+.dialog--manual .dialog__actions {
+  flex-shrink: 0;
+  margin: 0;
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border);
+  background-color: var(--card);
+  box-shadow: 0 -4px 12px -6px rgb(10 10 10 / 0.12);
 }

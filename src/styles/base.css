@@ -36,6 +36,12 @@ svg {
   max-width: 100%;
 }
 
+/* The hidden attribute must always win over component display rules
+   (e.g. flex/grid), so JS-toggled elements reliably show/hide. */
+[hidden] {
+  display: none !important;
+}
+
 button,
 input,
 textarea,
