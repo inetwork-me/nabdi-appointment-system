@@ -966,10 +966,11 @@
   color: var(--muted-foreground);
   line-height: 1.6;
 }
-/* Dialog footer — right-aligned action row (cancel / confirm) */
+/* Dialog footer — action row aligned to the inline-start (primary first),
+   matching .page-actions: primary sits at the reading start (right in RTL). */
 .dialog__actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: var(--space-3);
   margin-block-start: var(--space-2);
 }
