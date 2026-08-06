@@ -984,73 +984,40 @@
   flex-direction: column;
   gap: var(--space-4);
 }
-/* Independently scrolling content region inside a dialog step */
-.dialog__scroll {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-}
 /* Scrollable list of catalog matches inside the manual-service dialog.
    Reuses .plan-item rows for each result — no bespoke result component. */
 .manual-results {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  max-height: 15rem;
+  overflow-y: auto;
 }
 
-/* --------------------------------------------------------------------- *
- * Manual-service dialog layout — fixed header + search, independently
- * scrolling content, and a pinned action footer. Caps at the viewport so
- * the footer never scrolls out of view and no dead space is left below.
- * Scoped to .dialog--manual so the base Dialog contract is untouched.
- * --------------------------------------------------------------------- */
-.dialog--manual {
+/* Manual-service dialog — cap the height and keep the action buttons pinned
+   to the bottom so they stay visible while the form content scrolls. Scoped
+   to the dialog via its data hook; the base Dialog component is untouched. */
+[data-manual-dialog].dialog {
   display: flex;
   flex-direction: column;
   max-height: min(90vh, 46rem);
 }
-.dialog--manual .dialog__body {
-  flex: 1;
+[data-manual-dialog] .dialog__body {
   min-height: 0;
-  gap: 0;
-  padding: 0;
-  overflow: hidden;
+  overflow-y: auto;
 }
-.dialog--manual .dialog__head {
-  flex-shrink: 0;
-  padding: var(--space-6) var(--space-6) var(--space-4);
-}
-.dialog--manual .dialog__step {
-  flex: 1;
-  min-height: 0;
-  gap: var(--space-3);
-}
-/* The search field stays fixed; only the results/suggestions area scrolls */
-.dialog--manual .dialog__step[data-manual-step="search"] {
-  padding-inline: var(--space-6);
-}
-.dialog--manual .dialog__step[data-manual-step="search"] > .field {
-  flex-shrink: 0;
-}
-.dialog--manual .dialog__step[data-manual-step="search"] .dialog__scroll {
-  padding-block-end: var(--space-6);
-}
-/* Form fields scroll; the footer is a separate pinned sibling */
-.dialog--manual .dialog__step[data-manual-step="form"] {
-  gap: 0;
-}
-.dialog--manual .dialog__step[data-manual-step="form"] .dialog__scroll {
-  padding: 0 var(--space-6) var(--space-4);
-}
-/* Pinned footer — white surface, top border, elevation over the content */
-.dialog--manual .dialog__actions {
-  flex-shrink: 0;
-  margin: 0;
+[data-manual-dialog] .dialog__actions {
+  position: sticky;
+  bottom: calc(var(--space-6) * -1);
+  margin-block: var(--space-2) calc(var(--space-6) * -1);
+  margin-inline: calc(var(--space-6) * -1);
   padding: var(--space-4) var(--space-6);
   border-top: 1px solid var(--border);
   background-color: var(--card);
   box-shadow: 0 -4px 12px -6px rgb(10 10 10 / 0.12);
+}
+/* An inactive step / conditional block must hide even though its component
+   class sets display:flex. Scoped to this dialog only. */
+[data-manual-dialog] [hidden] {
+  display: none !important;
 }
