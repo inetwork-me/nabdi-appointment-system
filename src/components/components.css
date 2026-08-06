@@ -980,8 +980,10 @@
 }
 /* Manual-service dialog — cap the height and keep the action buttons pinned
    to the bottom so they stay visible while the form content scrolls. Scoped
-   to the dialog via its data hook; the base Dialog component is untouched. */
-[data-manual-dialog].dialog {
+   to the dialog via its data hook; the base Dialog component is untouched.
+   Gated on [open] so a CLOSED dialog keeps the UA `display: none` (otherwise
+   `display: flex` would render it inline at the bottom of the page). */
+[data-manual-dialog][open].dialog {
   display: flex;
   flex-direction: column;
   max-height: min(90vh, 46rem);
